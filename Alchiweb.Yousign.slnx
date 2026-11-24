@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/.SolutionItems/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Sample/">
+    <Project Path="src/Alchiweb.Yousign.Sample.Core/Alchiweb.Yousign.Sample.Core.csproj" />
+    <Project Path="src/Alchiweb.Yousign.Sample/Alchiweb.Yousign.Sample.csproj" />
+  </Folder>
+  <Project Path="src/Alchiweb.Yousign/Alchiweb.Yousign.csproj" />
+</Solution>
