@@ -29,7 +29,7 @@
         <!-- Version -->
         <ReleaseVersion>0.7.0.0</ReleaseVersion>
           <PackageVersion>$(ReleaseVersion)</PackageVersion>
-        <PackageReleaseNotes>based on BitPlatform v10.7.0</PackageReleaseNotes>
+        <PackageReleaseNotes>based on AlchiwebApp v0.7.0</PackageReleaseNotes>
         <Version Condition=" '$(Configuration)' == 'Release' ">$([System.String]::Copy($(ReleaseVersion)).Replace('-pre-', '.'))</Version>
         <Version Condition=" '$(Configuration)' == 'Debug' ">$([System.String]::Copy($(ReleaseVersion)).Replace('-pre-', '.'))</Version>
         <Deterministic>true</Deterministic>
