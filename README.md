@@ -21,4 +21,4 @@ Launch the project with the 'https' profile.
 Use the "**Alchiweb.Yousign.Sample.http**" file to test the API endpoints:
 - POST /webhook/yousign/ -> webhook to receive events from Yousign (with signature verification) and store them in the database 
 - GET /api/signature -> get signatures from the database with filters and sorting
-- GET {{Alchiweb.Yousign.Sample_HostAddress}}/api/signature/{id} -> get a specific signature from the database
+- GET /api/signature/{id} -> get a specific signature from the database
