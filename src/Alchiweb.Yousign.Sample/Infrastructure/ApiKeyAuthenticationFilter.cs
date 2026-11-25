@@ -19,8 +19,6 @@ public class ApiKeyAuthenticationFilter : IEndpointFilter
         string signature = context.HttpContext.Request.Headers[ICryptoService.SIGNATURE_HEADER].FirstOrDefault() ?? "";
         string timestamp = context.HttpContext.Request.Headers[ICryptoService.TIMESTAMP_HEADER].FirstOrDefault() ?? "";
 
-        _cryptoService.IsSignatureValid(signature, timestamp);
-
         if (!_cryptoService.IsSignatureValid(signature, timestamp))
             return TypedResults.Unauthorized();
 

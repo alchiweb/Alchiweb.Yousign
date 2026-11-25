@@ -1,25 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AlchiwebApp.Ardalis.Specification.EntityFrameworkCore" Version="0.7.0" />
-    <PackageReference Include="AlchiwebApp.PagingFiltering" Version="0.7.0" />
-    <PackageReference Include="AlchiwebApp.Server.Core" Version="0.7.0" />
-	<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="10.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.15" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.15" />
-    <PackageReference Include="Riok.Mapperly" Version="5.0.0-next.14" />
-    <PackageReference Include="Scalar.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="AlchiwebApp.Ardalis.Specification.EntityFrameworkCore" />
+    <PackageReference Include="AlchiwebApp.PagingFiltering"/>
+    <PackageReference Include="AlchiwebApp.Server.Core" />
+	<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+    <PackageReference Include="Riok.Mapperly" />
+    <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>

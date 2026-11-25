@@ -1,6 +1,8 @@
 <Solution>
   <Folder Name="/.SolutionItems/">
     <File Path="README.md" />
+    <File Path="src/Alchiweb.Build.props" />
+    <File Path="src/Directory.Packages.props" />
   </Folder>
   <Folder Name="/Sample/">
     <Project Path="src/Alchiweb.Yousign.Sample.Core/Alchiweb.Yousign.Sample.Core.csproj" />

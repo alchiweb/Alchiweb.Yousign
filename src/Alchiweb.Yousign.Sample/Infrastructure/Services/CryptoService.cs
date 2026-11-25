@@ -5,8 +5,10 @@ namespace Alchiweb.Yousign.Sample.Infrastructure.Services;
 
 public class CryptoService : ICryptoService
 {
+    private string? _apiKey;
     public CryptoService(IConfiguration configuration)
     {
+        _apiKey = configuration.GetSection("Yousign")?.GetValue<string>("apiKey");
     }
     public (string signature, string timestamp) CreateSignature()
     {
@@ -24,7 +26,7 @@ public class CryptoService : ICryptoService
 
     private string CreateSignatureWithTimestamp(string timestamp)
     {
-        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(timestamp));
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes($"{timestamp}&{_apiKey}"));
         return Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(timestamp)));
     }
 }

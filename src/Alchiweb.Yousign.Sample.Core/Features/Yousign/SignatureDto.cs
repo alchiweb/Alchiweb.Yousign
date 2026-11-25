@@ -7,31 +7,31 @@ namespace Alchiweb.Yousign.Sample.Core.Features.Yousign;
 public record SignatureDto : DtoBase<Guid>
 {
     #region Properties
-    [Display(Name = "Espace de travail")]
+    [Display(Name = "Workspace")]
     public Guid WorkspaceId { get; set; }
-    [Display(Name = "Identifiant")]
+    [Display(Name = "Id")]
     public string ExternalId { get; set; } = "";
-    [Display(Name = "Nom")]
+    [Display(Name = "Name")]
     public string Name { get; set; } = "";
-    [Display(Name = "Domaine")]
+    [Display(Name = "Domain")]
     public string Domain { get; set; } = "";
 
-    [Display(Name = "Statut")]
+    [Display(Name = "Status")]
     public SignatureStatusDtoEnum SignatureStatus { get; set; }
-    [Display(Name = "Email expéditeur")]
+    [Display(Name = "Sender email")]
     public string SenderEmail { get; set; } = "";
-    [Display(Name = "Est sequentiel")]
+    [Display(Name = "Is sequential")]
     public bool IsSequential { get; set; }
 
-    [Display(Name = "Date de création")]
+    [Display(Name = "Creating date")]
     public DateTimeOffset? CreatedAt { get; set; }
-    [Display(Name = "Date de suppression")]
+    [Display(Name = "Deleting date")]
     public DateTimeOffset? DeletedAt { get; set; }
-    [Display(Name = "Date d'expiration")]
+    [Display(Name = "Expiration date")]
     public DateTimeOffset? ExpirationDate { get; set; }
-    [Display(Name = "Date du dernier événement")]
+    [Display(Name = "Last event date")]
     public DateTimeOffset? LastEventDate { get; set; }
-    [Display(Name = "Date de la fin de la signature")]
+    [Display(Name = "Done date")]
     public DateTimeOffset? DoneDate { get; set; }
     #endregion
 

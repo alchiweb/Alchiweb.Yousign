@@ -1,6 +1,136 @@
-@Alchiweb.Yousign.Sample_HostAddress = http://localhost:5276
+@Alchiweb.Yousign.Sample_HostAddress = https://localhost:7011
 
-GET {{Alchiweb.Yousign.Sample_HostAddress}}/weatherforecast/
+POST {{Alchiweb.Yousign.Sample_HostAddress}}/webhook/yousign/
+X-Yousign-Signature-256: sha256=f2c3f0f8606d8c883915721849f30367ec8e8db580f90aeedda771dfdde63544
+Content-Type: application/json
+
+{
+  "event_id": "d09f0367-d80a-309c-a2ed-7083991fc564",
+  "event_name": "signature_request.activated",
+  "event_time": "1670855889",
+  "subscription_id": "d09f0367-d80a-309c-a2ed-7083991fc564",
+  "subscription_description": "Notifies our system when an even occurs.",
+  "sandbox": true,
+  "data": {
+    "signature_request": {
+      "id": "0ef334d2-7f36-4643-8a2a-4283b4a3e4a4",
+      "status": "ongoing",
+      "name": "My Signature Request",
+      "delivery_mode": "email",
+      "created_at": "2024-01-18T22:59:00Z",
+      "activated_at": "2024-01-18T22:59:00Z",
+      "completed_at": "2024-01-18T22:59:00Z",
+      "approved_at": "2024-01-18T22:59:00Z",
+      "deleted_at": "2024-01-18T22:59:00Z",
+      "timezone": "Europe/Paris",
+      "expiration_date": "2024-01-18T22:59:59Z",
+      "source": "public_api",
+      "ordered_signers": true,
+      "external_id": "ref#1234",
+      "workspace_id": "0ef334d2-7f36-4643-8a2a-4283b4a3e4a4",
+      "sender": {
+        "id": "550e8402-e29b-41d4-a716-446655440000",
+        "email": "john.doe@example.com"
+      },
+      "reminder_settings": {
+        "interval_in_days": 1,
+        "max_occurrences": 2
+      },
+      "embedded_preparation": {
+        "redirect_urls": {
+          "done": "https://integrator.com/done",
+          "back": "https://integrator.com/back"
+        }
+      },
+      "signers": [
+        {
+          "id": "550e8402-e29b-41d4-a716-446655440000",
+          "status": "notified",
+          "delivery_mode": "email",
+          "answers": [
+            {
+              "field_id": "89d519d7-63bd-45d2-8539-a10a9172368a",
+              "name": "Street Address",
+              "question": "What is your address?",
+              "answer": "42 Elm St, Rivertown, NY 10567",
+              "default_value": "47 Elm Street, Rivertown, NY 10567",
+              "read_only": true
+            },
+            {
+              "field_id": "89d519d7-63bd-45d2-8539-a10a9172368a",
+              "name": "Terms and conditions acceptance",
+              "checked": true,
+              "optional": true,
+              "read_only": true,
+              "default_checked": true
+            },
+            {
+              "field_id": "89d519d7-63bd-45d2-8539-a10a9172368a",
+              "name": "Preferred Contact Method",
+              "optional": true,
+              "read_only": true,
+              "radios": [
+                {
+                  "id": "a1f25bb3-37a7-4f5e-bd5e-46d1fcbd1e99",
+                  "name": "Email",
+                  "x": 120,
+                  "y": 420,
+                  "checked": true
+                }
+              ]
+            }
+          ],
+          "recipient_stage_index": 0
+        }
+      ],
+      "approvers": [
+        {
+          "id": "550e8402-e29b-41d4-a716-446655440000",
+          "status": "approved",
+          "recipient_stage_index": 0
+        }
+      ],
+      "labels": [
+        {
+          "id": "0ef334d2-7f36-4643-8a2a-4283b4a3e4a4",
+          "name": "Invoices"
+        }
+      ],
+      "documents": [
+        {
+          "id": "0ef334d2-7f36-4643-8a2a-4283b4a3e4a4",
+          "nature": "signable_document"
+        }
+      ],
+      "custom_properties": [
+        {
+          "id": "0ef334d2-7f36-4643-8a2a-4283b4a3e4a4",
+          "name": "Department",
+          "type": "text",
+          "value": "Marketing",
+          "value_ids": [
+            "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          ],
+          "values": [
+            "string"
+          ]
+        }
+      ]
+    }
+  }
+}
+
+###
+
+GET {{Alchiweb.Yousign.Sample_HostAddress}}/api/signature/?filter={"domain":[{"c":1,"s":""}],"lastEventdate":[{"c":15,"s":["2022-01-01","2100-01-01"]}]}&with=1
 Accept: application/json
+X-Timestamp: 2026-11-11
+X-Signature: hFStvuaGTyy3m5Am2FOhXPMkGcOJXKGSSO8JGbw3naw=
 
+###
+
+GET {{Alchiweb.Yousign.Sample_HostAddress}}/api/signature/0ef334d2-7f36-4643-8a2a-4283b4a3e4a4?with=1
+Accept: application/json
+X-Timestamp: 2026-11-11
+X-Signature: hFStvuaGTyy3m5Am2FOhXPMkGcOJXKGSSO8JGbw3naw=
 ###

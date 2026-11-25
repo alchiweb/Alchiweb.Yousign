@@ -27,9 +27,9 @@
         <PackageProjectUrl>https://github.com/alchiweb/AlchiwebApp</PackageProjectUrl>
 
         <!-- Version -->
-        <ReleaseVersion>0.7.0.0</ReleaseVersion>
-          <PackageVersion>$(ReleaseVersion)</PackageVersion>
-        <PackageReleaseNotes>based on AlchiwebApp v0.7.0</PackageReleaseNotes>
+        <ReleaseVersion>0.7.0.1</ReleaseVersion>
+        <PackageVersion>$(ReleaseVersion)</PackageVersion>
+        <PackageReleaseNotes>based on AlchiwebApp v0.7.0.1</PackageReleaseNotes>
         <Version Condition=" '$(Configuration)' == 'Release' ">$([System.String]::Copy($(ReleaseVersion)).Replace('-pre-', '.'))</Version>
         <Version Condition=" '$(Configuration)' == 'Debug' ">$([System.String]::Copy($(ReleaseVersion)).Replace('-pre-', '.'))</Version>
         <Deterministic>true</Deterministic>
@@ -42,7 +42,7 @@
         <WarningsAsErrors>$(WarningsAsErrors);CS0114;RZ10012</WarningsAsErrors>
         <!-- https://stackoverflow.com/a/46815541/2720104 -->
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    </PropertyGroup>
+	</PropertyGroup>
 
 
     <!-- README and LICENSE -->

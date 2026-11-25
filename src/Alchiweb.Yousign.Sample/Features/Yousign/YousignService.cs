@@ -3,20 +3,16 @@ using System.Text.Json;
 using Alchiweb.Yousign.Sample.Core.Features.Yousign;
 using Alchiweb.Yousign.Sample.Domain;
 using Alchiweb.Yousign.Sample.Domain.Enums;
-using Alchiweb.Yousign.Sample.Infrastructure.Services;
 using Ardalis.Specification.EntityFrameworkCore.SharedKernel;
 
 namespace Alchiweb.Yousign.Sample.Features.Yousign;
 
 public class YousignService : IYousignService
 {
-    private const string ALCHIWEB_WEBHOOK_URL = "sample.com/webhook/yousign";
-    
     protected readonly IRepository<Signature, Guid> _signatureRepository;
     protected readonly IRepository<Signer, Guid> _signerRepository;
     protected readonly IRepository<Document, Guid> _documentRepository;
     protected readonly IRepository<Approver, Guid> _approverRepository;
-    protected readonly ICryptoService _cryptoService;
     protected readonly ILogger<YousignService> _logger;
     protected readonly DtoMapper _mapper;
     protected readonly JsonSerializerOptions _jsonOptions;
@@ -26,7 +22,6 @@ public class YousignService : IYousignService
         IRepository<Signer, Guid> signerRepository,
         IRepository<Document, Guid> documentRepository,
         IRepository<Approver, Guid> approverRepository,
-        ICryptoService cryptoService,
         ILogger<YousignService> logger,
         DtoMapper mapper,
         JsonSerializerOptions jsonOptions
@@ -36,7 +31,6 @@ public class YousignService : IYousignService
         _signerRepository = signerRepository;
         _documentRepository = documentRepository;
         _approverRepository = approverRepository;
-        _cryptoService = cryptoService;
         _logger = logger;
         _mapper = mapper;
         _jsonOptions = jsonOptions;
@@ -95,25 +89,7 @@ public class YousignService : IYousignService
             {
                 var signerObject = _mapper.Map(signer);
                 var signerJson = JsonSerializer.Serialize(signerObject, _jsonOptions);
-                var signatureWithTimestamp = _cryptoService.CreateSignature();
-                string domain = "";
-                if (signer.Signature != null)
-                {
-                    domain = $"https://{signer.Signature.Domain}{(string.IsNullOrWhiteSpace(signer.Signature.Domain) ? "" : ".")}{ALCHIWEB_WEBHOOK_URL}";
-                }
-                if (signer.Signature == null || signer.Signature.Domain.Equals("localhost", StringComparison.OrdinalIgnoreCase))
-                {
-                    using (_logger.BeginScope("Yousign/Signer/localhost"))
-                    {
-                        _logger.LogWarning("{Domain}", domain);
-                        _logger.LogWarning("{SignerJson}", signerJson);
-                    }
-                }
-                else
-                {
-                    await CallAlchiwebWebhook(signerJson, domain, signatureWithTimestamp, ct);
-                }
-
+                Console.WriteLine(signerJson);
             }
             return true;
         }
@@ -343,51 +319,10 @@ public class YousignService : IYousignService
 
                 var signatureObject = _mapper.Map(signature);
                 var signatureJson = JsonSerializer.Serialize(signatureObject, _jsonOptions);
-                var signatureWithTimestamp = _cryptoService.CreateSignature();
-                string domain = $"https://{signature.Domain}{(string.IsNullOrWhiteSpace(signature.Domain) ? "" : ".")}{ALCHIWEB_WEBHOOK_URL}";
-                if (signature.Domain.Equals("localhost", StringComparison.OrdinalIgnoreCase))
-                {
-                    using (_logger.BeginScope("Yousign/Signature/localhost"))
-                    {
-                        _logger.LogWarning("{AlchiwebAppDomain}", domain);
-                        _logger.LogWarning("{SignatureJson}", signatureJson);
-                    }
-                }
-                else
-                {
-                    await CallAlchiwebWebhook(signatureJson, domain, signatureWithTimestamp, ct);
-                    /*
-                    var with = SignatureDtoWithEnum.All;
-                    //var filter = UrlEncoder.Create().Encode(@"{""SearchApproverFilters"":[],""DomainFilters"":[],""NameFilters"":[{"c":2,"s":"sign","o":true],""SenderEmailFilters"":[],""StatusFilters"":[],""LastEventDateFilters"":[],""o"":{},""p"":1,""s"":10}");
-                    var filterDto = new SignatureDtoFilter();//sorting: SignatureFieldDtoEnum.SignatureStatus, page: 2, pageSize: 15);
-                    //filterDto.NameFilters.Add(new(StringFieldFilterEnum.Contains, "sign", true));
-                    var filterText = JsonSerializer.Serialize(filterDto);
-                    // filterText -> {"signer":[],"domain":[],"name":[{"c":2,"s":"sign","o":true}],"senderEmail":[],"status":[],"date":[],"o":{"SignatureStatus":{"p":0,"r":false}},"p":2,"s":15}
-                    var filter = Uri.EscapeDataString(filterText);
-                    var response = await httpclient.GetAsync($"http://localhost:5223/api/signature/?with={with}&filter={filter}", ct);
-                    //var responseContent = await response.Content.ReadFromJsonAsync<ApiResponse<PagedList<SignatureDto>>>(ct);
-                    var responseContent = await response.Content.ReadAsStringAsync(ct);
-                    */
-                }
+                Console.WriteLine(signatureJson);
             }
             return true;
         }
         return false;
-    }
-
-    private async Task CallAlchiwebWebhook(string json, string domain, (string signature, string timestamp) signatureWithTimestamp, CancellationToken ct)
-    {
-        using var httpclient = new HttpClient();
-        httpclient.DefaultRequestHeaders.Add(ICryptoService.SIGNATURE_HEADER, signatureWithTimestamp.signature);
-        httpclient.DefaultRequestHeaders.Add(ICryptoService.TIMESTAMP_HEADER, signatureWithTimestamp.timestamp);
-        try
-        {
-            HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
-            await httpclient.PostAsync($"{domain}", requestContent, ct);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error call Alchiweb Wehook: Post {AlchiwebUrl} {Json}", domain, json);
-        }
     }
 }

@@ -28,12 +28,12 @@ public class SignatureByFilterSpec : Specification<Signature>
                 .Include(s => s.Documents);
         }
 
-        this.ApplyFiltering(filter.DomainFilters, SignatureFieldEnum.Domain);
-        this.ApplyFiltering(filter.NameFilters, SignatureFieldEnum.Name);
-        this.ApplyFiltering(filter.SenderEmailFilters, SignatureFieldEnum.SenderEmail);
-        this.ApplyFiltering(filter.StatusFilters, SignatureFieldEnum.SignatureStatus);
-        this.ApplyFiltering(filter.LastEventDateFilters, SignatureFieldEnum.LastEventDate);
-        this.ApplyFiltering(filter.DoneDateFilters, SignatureFieldEnum.DoneDate);
+        this.ApplyFiltering(filter.DomainFilters, SignatureFieldEnum.Domain, false);
+        this.ApplyFiltering(filter.NameFilters, SignatureFieldEnum.Name, false);
+        this.ApplyFiltering(filter.SenderEmailFilters, SignatureFieldEnum.SenderEmail, false);
+        this.ApplyFiltering(filter.StatusFilters, SignatureFieldEnum.SignatureStatus, false);
+        this.ApplyFiltering(filter.LastEventDateFilters, SignatureFieldEnum.LastEventDate, false);
+        this.ApplyFiltering(filter.DoneDateFilters, SignatureFieldEnum.DoneDate, false);
 
         if (filter.SortBy.Count == 0)
         {

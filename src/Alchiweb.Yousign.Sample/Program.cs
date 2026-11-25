@@ -66,13 +66,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapGroup("/webhook").UseYousignWebHookEndpoints();
 
-var webhookGroup = app.MapGroup("/webhook");
-webhookGroup
-    .UseYousignWebHookEndpoints();
-
-var apiGroup = app.MapGroup("/api").RequireApiKeyAuthentication();
-apiGroup
-    .UseSignatureApiEndpoints();
+app.MapGroup("/api").RequireApiKeyAuthentication().UseSignatureApiEndpoints();
 
 app.Run();

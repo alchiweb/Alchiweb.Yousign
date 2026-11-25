@@ -20,7 +20,7 @@ public static class YousignWebhookEndpoint
             [FromServices] IConfiguration configuration,
             Stream body
             //HttpContext context
-            //Arcane.Yousign.Webhook.Payload payload
+            //Payload payload
             ) =>
             {
                 using StreamReader reader = new StreamReader(body, Encoding.UTF8);
