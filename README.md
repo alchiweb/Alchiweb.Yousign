@@ -1,10 +1,12 @@
-# Binding .NET Core API Yousign
+# Binding .NET Core API Yousign (now Youtrust)
 
 This is the source of the Alchiweb.Yousign Nuget package, with a sample project (need to be used with a Yousign account).
 
 ## Yousign binding: "Alchiweb.Yousign" project
 
 This is the nuget package to use the Yousign API in a .NET Core project.
+
+Documentation of the Yousign API is available at: https://developers.youtrust.com/reference/webhook-1
 
 ## Sample project
 
